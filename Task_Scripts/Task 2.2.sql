@@ -31,15 +31,17 @@ order by Customer, Seller
 go
 --Task 2.2.5
 Select CompanyName as 'Customer', City
-from Customers as c
-where City in (select City from Customers
+from Customers
+where City in (select City 
+				from Customers
 				group by City
-				having count(*) > 1)
+				having count(CustomerID) > 1)
 order by City
 go
 --Task 2.2.6
 Select s.LastName + ' ' + s.FirstName as 'Seller',
-	m.LastName + ' ' + m.FirstName as 'Manager'
+	(select m.LastName + ' ' + m.FirstName
+	from Employees as m
+	where m.EmployeeID = s.ReportsTo)  as 'Manager'
 from Employees as s
-	left join Employees as m
-	on s.ReportsTo = m.EmployeeID
+where s.ReportsTo is not null
