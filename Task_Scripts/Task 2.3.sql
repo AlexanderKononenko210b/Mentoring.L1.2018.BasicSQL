@@ -13,6 +13,6 @@ go
 Select c.CustomerID as 'Customer', 
 	   count(o.OrderID) as 'Total orders'
 from Customers as c
-	Join Orders as o
+	Left Join Orders as o
 	on c.CustomerID = o.CustomerID
 group by c.CustomerID
