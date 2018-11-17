@@ -30,7 +30,7 @@ where c.City = e.City
 order by Customer, Seller
 go
 --Task 2.2.5
-Select CompanyName as 'Customer', City
+Select ContactName as 'Customer', City
 from Customers
 where City in (select City 
 				from Customers
